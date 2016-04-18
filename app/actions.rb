@@ -30,3 +30,20 @@ get '/music/:id' do
   erb :'music/show'
 end
 
+get '/signup' do
+  erb :signup 
+end
+
+post '/signup' do 
+  if params[:password] == params[:password_confirmation]
+    user = User.create(
+      email: params[:email],
+      password: params[:password]
+      )
+    session[:user_id] = user.id
+    redirect '/music'
+  end
+end
+
+
+
